@@ -1,16 +1,17 @@
 from openai import OpenAI
 import streamlit as st
 import shelve
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
 
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+# load_dotenv()
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.title("Marvin, the depressed robot")
-st.sidebar.image('sad_robot.jpg', caption='My name is Marvin and I\'m depressed', use_column_width=True)
+st.sidebar.image(
+    'sad_robot.jpg', caption='My name is Marvin and I\'m depressed', use_column_width=True)
 
 
 USER_AVATAR = "👤"
@@ -41,8 +42,8 @@ def save_chat_history(messages):
 if "messages" not in st.session_state:
     st.session_state.messages = load_chat_history(system_message)
 
-count = len(st.session_state.messages)
-f'length of session state is {count}'
+# count = len(st.session_state.messages)
+# f'length of session state is {count}'
 
 
 # Sidebar with a button to delete chat history
